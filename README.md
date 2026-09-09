@@ -52,6 +52,28 @@ streamlit run app.py
 
 Open the local URL shown in the terminal, usually `http://localhost:8501`.
 
+## Deployment
+
+This project is a Streamlit application. It cannot be deployed directly as a Vercel Python Function: Vercel expects a top-level HTTP entry point such as `app`, `application`, or `handler`, while Streamlit starts and manages its own web server.
+
+### Recommended: Streamlit Community Cloud
+
+1. Push this repository to GitHub.
+2. Open [Streamlit Community Cloud](https://share.streamlit.io/).
+3. Create a new app and select the repository and `main` branch.
+4. Set the main file path to `app.py`.
+5. Deploy.
+
+Streamlit Community Cloud installs `requirements.txt` and runs the app with the correct Streamlit runtime.
+
+Other suitable hosts include Render or Railway when configured as a long-running web service with this start command:
+
+```bash
+streamlit run app.py --server.address 0.0.0.0 --server.port $PORT
+```
+
+Do not add a fake `app` or `handler` variable to `app.py`; that would satisfy Vercel's error message without making the Streamlit dashboard compatible with Vercel Functions.
+
 ## Using the Dashboard
 
 1. Use the country selector to focus the dashboard on one or more countries.
