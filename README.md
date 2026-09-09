@@ -1,28 +1,109 @@
-# E-Waste Recycling Dashboard
+# E-Waste Intelligence
 
-Interactive Streamlit dashboard for the supplied 2022 e-waste dataset.
+An interactive Streamlit dashboard for exploring how 20 countries generated and recycled electronic waste in 2022.
 
-## Run locally
+The dashboard turns a compact country-level dataset into a visual comparison of scale, recycling performance, and the gap between waste generated and material recovered.
 
-1. Install Python 3.10+.
-2. Open a terminal in this folder.
-3. Install dependencies:
+## What You Can Explore
+
+- **The Scale** — total generated waste, recycled material, weighted recycling rate, and the top performer for the current selection.
+- **The Leaders** — sortable country rankings with recycling-rate comparisons.
+- **The Recycling Gap** — generated-versus-recycled volume charts and a recycling-rate signal map.
+- **Country Face-Off** — compare two countries side by side.
+- **Data Signals** — automatically generated observations from the selected countries.
+- **Data Explorer** — inspect filtered source rows and download the selection as a CSV file.
+- **The Team** — project credits for the people behind the visualization.
+
+## Quick Start
+
+### Requirements
+
+- Python 3.10 or newer
+- Internet access on first launch if the browser needs to load the dashboard fonts
+
+### Install and run
+
+From the project directory:
 
 ```bash
-pip install -r requirements.txt
+python -m venv .venv
 ```
 
-4. Start the dashboard:
+Activate the environment:
+
+**Windows PowerShell**
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+**macOS / Linux**
 
 ```bash
+source .venv/bin/activate
+```
+
+Install the project dependencies and start Streamlit:
+
+```bash
+python -m pip install -r requirements.txt
 streamlit run app.py
 ```
 
-The app will open in your browser.
+Open the local URL shown in the terminal, usually `http://localhost:8501`.
 
-## Files
+## Using the Dashboard
 
-- `app.py` — Streamlit application
-- `e-waste_data_2022_complete.csv` — project dataset
-- `requirements.txt` — Python dependencies
-"# ewaste-data-visualization" 
+1. Use the country selector to focus the dashboard on one or more countries.
+2. Adjust the recycling-rate slider to narrow the range of results.
+3. Choose whether rankings are sorted by rate, generated waste, or recycled waste.
+4. Use the top navigation to jump between sections.
+5. Open **EXPLORE THE RAW DATA** near the end of the page to inspect or download the filtered rows.
+
+The calculations update from the active selection. Clearing every country is prevented from producing misleading empty charts by a visible validation message.
+
+## Dataset
+
+Source file: `e-waste_data_2022_complete.csv`
+
+| Column | Description |
+| --- | --- |
+| `Country` | Country name |
+| `Year` | Dataset year, 2022 |
+| `E-Waste Generated (Kt)` | E-waste generated in kilotonnes |
+| `E-Waste Recycled (Kt)` | E-waste recycled in kilotonnes |
+| `Recycling Rate (%)` | Reported recycling rate as a percentage |
+
+The app cleans column names, converts numeric fields safely, and trims country names before calculating the dashboard metrics.
+
+## Project Structure
+
+```text
+.
+├── app.py                         # Streamlit application
+├── e-waste_data_2022_complete.csv # 2022 country-level dataset
+├── requirements.txt               # Python dependencies
+└── README.md                      # Project documentation
+```
+
+## Dependencies
+
+- [Streamlit](https://streamlit.io/) for the interactive application
+- [Pandas](https://pandas.pydata.org/) for loading and transforming the dataset
+- [Plotly](https://plotly.com/python/) for interactive charts
+
+## Project Team
+
+- **Yash Patil** — `24101A0065`
+- **Gaurav Ghude** — `24101A0061`
+- **Sayali Andhale** — `24101A0024`
+
+## Validation
+
+Run a lightweight syntax check before launching the app:
+
+```bash
+python -m py_compile app.py
+```
+
+Then start Streamlit and verify the navigation, filters, charts, CSV download, responsive layout, and team section in the browser.
